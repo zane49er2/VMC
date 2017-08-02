@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import zane49er.VolkiharEchoes.init.ModItems;
+import zane49er.VolkiharEchoes.init.ModTabs;
 import zane49er.VolkiharEchoes.main.References;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -27,6 +28,7 @@ public class Stabilizer extends Block {
 		setLightLevel(0.6f);
 		setLightOpacity(0);
 		setHardness(3.0f);
+		setCreativeTab(ModTabs.useful);
 	}
 
 	@Override
