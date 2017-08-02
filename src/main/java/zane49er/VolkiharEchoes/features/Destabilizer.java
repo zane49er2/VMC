@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class Destabilizer extends Block {
 
 	boolean powered;
-	int size = 1;
+	int size = 2;
 	int particleRows = 10;
 	int particleLayers = 5;
 
@@ -52,7 +52,7 @@ public class Destabilizer extends Block {
 				 * int x = 1; int y = 1; int z = 1;
 				 */
 				if (0 < Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2) && 5 > Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2)) {
-					worldIn.spawnParticle(EnumParticleTypes.CRIT_MAGIC, (double) pos.getX() + 0.5 + x, (double) pos.getY() + 2 + y + size, (double) pos.getZ() + 0.5 + z, 0, 0, 0, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, (double) pos.getX() + 0.5 + x, (double) pos.getY() + 2 + y + size, (double) pos.getZ() + 0.5 + z, 0, 0, 0, new int[0]);
 
 				}
 			}
