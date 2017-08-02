@@ -1,0 +1,64 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "vmc:rift",
+		"textures": {
+			"all": "vmc:blocks/rift"
+		}
+	},
+	//"variants": {
+	//	"color": {
+	//		"0": {
+	//			"textures": {
+	//				"all": "vmc:blocks/Rift_0"
+	//			}
+	//		},
+	//		"1": {
+	//			"textures": {
+	//				"all": "vmc:blocks/Rift_1"
+	//			}
+	//		},
+	//		"2": {
+	//			"textures": {
+	//				"all": "vmc:blocks/Rift_2"
+	//			}
+	//		},
+	//		"3": {
+	//			"textures": {
+	//				"all": "vmc:blocks/Rift_3"
+	//			}
+	//		},
+	//		"4": {
+	//			"textures": {
+	//				"all": "vmc:blocks/Rift_4"
+	//			}
+	//		},
+	//		"5": {
+	//			"textures": {
+	//				"all": "vmc:blocks/Rift_5"
+	//			}
+	//		},
+	//		"6": {
+	//			"textures": {
+	//				"all": "vmc:blocks/Rift_6"
+	//			}
+	//		},
+	//		"7": {
+	//			"textures": {
+	//				"all": "vmc:blocks/Rift_7"
+	//			}
+	//		},
+	//		"8": {
+	//			"textures": {
+	//				"all": "vmc:blocks/Rift_8"
+	//			}
+	//		}
+	//	},
+		"normal": {
+			"model": "vmc:rift",
+        		"textures": {
+      				"all": "vmc:blocks/rift"
+      			}
+    		}
+	}
+}

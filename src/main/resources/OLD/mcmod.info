@@ -1,0 +1,16 @@
+[
+{
+  "modid": "examplemod",
+  "name": "Example Mod",
+  "description": "A mod that adds many types of magic to your worlds.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ExampleDude"],
+  "credits": "Just me, zane49er.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

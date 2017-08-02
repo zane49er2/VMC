@@ -1,0 +1,23 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "vmc:stabilizer",
+		"textures": {
+ 			"texture": "vmc:blocks/Stabilizer",
+ 			"Cap": "vmc:blocks/MachineBase",
+  			"Side": "vmc:blocks/Stabilizer",
+  			"Rift": "vmc:blocks/Rift"
+		}
+	},
+	"variants": {
+		"normal": {
+			"model": "vmc:stabilizer",
+        		"textures": {
+ 				"texture": "vmc:blocks/Stabilizer",
+ 				"Cap": "vmc:blocks/MachineBase",
+  				"Side": "vmc:blocks/Stabilizer",
+   				"Rift": "vmc:blocks/Rift"
+      			}
+    		}
+	}
+}

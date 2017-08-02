@@ -1,0 +1,17 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "vmc:rift",
+		"textures": {
+			"all": "vmc:blocks/rift"
+		}
+	},
+	"variants": {
+		"normal": {
+			"model": "vmc:rift",
+        		"textures": {
+      				"all": "vmc:blocks/rift"
+      			}
+    		}
+	}
+}

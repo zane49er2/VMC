@@ -1,0 +1,13 @@
+itemGroup.Rift Colors=Rift Colors
+itemGroup.Crafting Rift Items=Crafting Rift Items
+itemGroup.Useful Rift Items=Useful Rift Items
+itemGroup.Alchemy Items=Alchemy Items
+
+tile.vmc:rift.name=Rift
+
+tile.vmc:stabilizer.name=Rift Stabilizer
+tile.vmc:destabilizer.name=Destabilizer Module
+
+item.vmc:essence.name=Clear Essence
+item.vmc:rift_tome.name=Rift Tome
+item.vmc:rift_reader.name=Rift Reader

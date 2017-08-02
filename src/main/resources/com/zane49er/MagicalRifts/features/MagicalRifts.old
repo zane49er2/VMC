@@ -1,0 +1,71 @@
+package com.zane49er.MagicalRifts.features;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Metadata;
+import cpw.mods.fml.common.ModMetadata;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+
+@Mod(modid = MagicalRifts.MODID, version = MagicalRifts.VERSION)
+public class MagicalRifts {
+	public static final String MODID = "MagicalRifts";
+	public static final String VERSION = "0.1";
+
+	@Metadata
+	public static ModMetadata meta;
+
+	public static CreativeTabs RiftTab = new CreativeTabs("Rift Colors") {
+		public Item getTabIconItem() {
+			return RiftReader;
+		}
+	};
+	public static CreativeTabs EssenceTab = new CreativeTabs(
+			"Crafting Rift Items") {
+		public Item getTabIconItem() {
+			return Essence;
+		}
+	};
+	public static CreativeTabs RiftItemsTab = new CreativeTabs(
+			"Useful Rift Items") {
+		public Item getTabIconItem() {
+			return RiftTome;
+		}
+	};
+	public static Gui RiftTomeGui;
+
+	public static Block Rift;
+	int RiftID = 500;
+
+	public static Item Essence;
+	int EssenceID = 600;
+	public static Item RiftTome;
+	int RiftTomeID = 601;
+	public static Item RiftReader;
+	int RiftReaderID = 602;
+
+	@EventHandler
+	public void init(FMLPreInitializationEvent event) {
+
+		Rift = new Rift(RiftID, Material.cloth).setHardness(1.5F).setBlockName(
+				"Rift");
+		Essence = new Essence(EssenceID).setUnlocalizedName("Essence");
+		RiftTome = new RiftTome(RiftTomeID).setUnlocalizedName("RiftTome");
+		RiftReader = new RiftReader(RiftReaderID).setUnlocalizedName("RiftReader");
+		RiftTomeGui = new RiftTomeGui();
+
+		GameRegistry.registerBlock(Rift, "Rift");
+		GameRegistry.registerItem(Essence, "Essence");
+		GameRegistry.registerItem(RiftTome, "RiftTome");
+		GameRegistry.registerItem(RiftReader, "RiftReader");
+
+	}
+}

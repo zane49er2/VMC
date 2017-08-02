@@ -1,0 +1,64 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "magicrifts:Rift",
+		"textures": {
+			"all": "magicrifts:blocks/Rift_8"
+		}
+	},
+	"variants": {
+		"color": {
+			"0": {
+				"textures": {
+					"all": "magicrifts:blocks/Rift_0"
+				}
+			},
+			"1": {
+				"textures": {
+					"all": "magicrifts:blocks/Rift_1"
+				}
+			},
+			"2": {
+				"textures": {
+					"all": "magicrifts:blocks/Rift_2"
+				}
+			},
+			"3": {
+				"textures": {
+					"all": "magicrifts:blocks/Rift_3"
+				}
+			},
+			"4": {
+				"textures": {
+					"all": "magicrifts:blocks/Rift_4"
+				}
+			},
+			"5": {
+				"textures": {
+					"all": "magicrifts:blocks/Rift_5"
+				}
+			},
+			"6": {
+				"textures": {
+					"all": "magicrifts:blocks/Rift_6"
+				}
+			},
+			"7": {
+				"textures": {
+					"all": "magicrifts:blocks/Rift_7"
+				}
+			},
+			"8": {
+				"textures": {
+					"all": "magicrifts:blocks/Rift_8"
+				}
+			}
+		}//,
+		//"normal": {
+		//	"model": "magicrifts:Rift",
+        	//	"textures": {
+      		//		"all": "magicrifts:blocks/Rift_0"
+      		//	}
+    		//}
+	}
+}

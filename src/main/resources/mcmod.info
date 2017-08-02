@@ -1,0 +1,17 @@
+[
+{
+    "modid": "vmc",
+    "name": "Volkihar's echoes",
+    "description": "Thousands of years after Volkihar dies, his magic lives within you. 
+(This mod is actually based on a full game that is not yet ready for release. This statement will make sense some day)",
+    "version": "${version}",
+    "mcVersion": "1.10.2",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["Zane49er"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+}
+]
