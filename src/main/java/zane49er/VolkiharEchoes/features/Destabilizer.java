@@ -17,6 +17,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Destabilizer extends Block {
 
+	boolean powered;
+	
 	public Destabilizer(String registryName) {
 		super(Material.PISTON);
 		setRegistryName(registryName);
@@ -25,48 +27,23 @@ public class Destabilizer extends Block {
 		setCreativeTab(ModTabs.useful);
 	}
 
-	/*//@Override
-	@SideOnly(Side.CLIENT)
+	@Override
+	//@SideOnly(Side.CLIENT)
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-		//if(!worldIn.isBlockPowered(pos)){
-			worldIn.spawnParticle(EnumParticleTypes.FLAME, (double)pos.getX(), (double)pos.getY()+5, (double)pos.getZ(), 0, 0, 0, new int[0]);
+		//if (!worldIn.isBlockPowered(pos)) {
+			powered = worldIn.isBlockPowered(pos);
 		//}
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		//if(!worldIn.isBlockPowered(pos)){
-			worldIn.spawnParticle(EnumParticleTypes.FLAME, (double)pos.getX(), (double)pos.getY()+5, (double)pos.getZ(), 0, 0, 0, new int[0]);
+		if (!powered) {
+			worldIn.spawnParticle(EnumParticleTypes.FLAME, (double) pos.getX() + 0.5 , (double) pos.getY() + 2, (double) pos.getZ() + 0.5 , 0, 0, 0, new int[0]);
 			super.randomDisplayTick(stateIn, worldIn, pos, rand);
-		//}
-	}*/
-	
-	//@Override
-	//@SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
-    {
-        //EnumFacing enumfacing = (EnumFacing)stateIn.getValue(FACING);
-        double d0 = (double)pos.getX() + 0.5D;
-        double d1 = (double)pos.getY() + 1.7D;
-        double d2 = (double)pos.getZ() + 0.5D;
-        double d3 = 0.22D;
-        double d4 = 0.27D;
+		}
+	}
 
-        System.out.println("PARITCELS");
-        //if (enumfacing.getAxis().isHorizontal())
-        //{
-        //    EnumFacing enumfacing1 = enumfacing.getOpposite();
-        //    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + 0.27D * (double)enumfacing1.getFrontOffsetX(), d1 + 0.22D, d2 + 0.27D * (double)enumfacing1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D, new int[0]);
-        //    worldIn.spawnParticle(EnumParticleTypes.FLAME, d0 + 0.27D * (double)enumfacing1.getFrontOffsetX(), d1 + 0.22D, d2 + 0.27D * (double)enumfacing1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D, new int[0]);
-        //}
-       // else
-       // {
-            worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
-            worldIn.spawnParticle(EnumParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
-        //}
-    }
-	
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		// super.isOpaqueCube(state);
@@ -89,12 +66,10 @@ public class Destabilizer extends Block {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
 	public boolean canConnectRedstone(IBlockState state, IBlockAccess access, BlockPos pos, EnumFacing facing) {
 		return true;
 	}
-	
-	
-	
+
 }
