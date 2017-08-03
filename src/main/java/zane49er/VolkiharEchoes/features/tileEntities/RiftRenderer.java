@@ -2,36 +2,70 @@ package zane49er.VolkiharEchoes.features.tileEntities;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.tileentity.TileEntity;
 
-public class RiftRenderer extends TileEntitySpecialRenderer {
+public class RiftRenderer extends TileEntitySpecialRenderer<TileEntityRift> {
 	
-	int r = 200;
-	int g = 200;
-	int b = 200;
 	
 	@Override
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float partialTick, int destroyStage) {
+	public void renderTileEntityAt(TileEntityRift te, double x, double y, double z, float partialTicks, int destroyStage) {
+		super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
 		GlStateManager.pushMatrix(); {
-			GlStateManager.translate(x + 0.5, y + 0.066, z + 0.75);
+
+			int r = te.r;
+			int g = te.g;
+			int b = te.b;
+			
+			float PBX = OpenGlHelper.lastBrightnessX;
+			float PBY = OpenGlHelper.lastBrightnessX;
+			int PBT = OpenGlHelper.lightmapTexUnit;
+			
+			GlStateManager.translate(x, y, z);
 			//GlStateManager.rotate(90F, 1.0F, 0.0F, 0.0F);
 			//GlStateManager.scale(0.25F, 0.25F, 0.25F);
-			GlStateManager.color(r, g, b);
-	        GlStateManager.disableLighting();
+			
 			Tessellator wrt = Tessellator.getInstance();
 	        VertexBuffer wr = wrt.getBuffer();
+	        
+	        GlStateManager.disableLighting();
+	        GlStateManager.disableTexture2D();
+	        OpenGlHelper.setLightmapTextureCoords(1, 240, 240);
+
 	        wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
-	        wr.color(r, g, b, 255);
-			wr.pos(x, y, z);
-			wr.pos(x+1, y, z);
-			wr.pos(x+1, y+1, z);
-			wr.pos(x, y+1, z);
+			wr.pos(0, 0, 0).color(r, b, g, 255).endVertex();
+			wr.pos(1, 0, 0).color(r, b, g, 255).endVertex();
+			wr.pos(1, 1, 0).color(r, b, g, 255).endVertex();
+			wr.pos(0, 1, 0).color(r, b, g, 255).endVertex();
+
 			wrt.draw();
+			
+	        wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
+			wr.pos(0, 0, 0).color(r, b, g, 255).endVertex();
+			wr.pos(0, 1, 0).color(r, b, g, 255).endVertex();
+			wr.pos(1, 1, 0).color(r, b, g, 255).endVertex();
+			wr.pos(1, 0, 0).color(r, b, g, 255).endVertex();
+			
+			wrt.draw();
+			
+	        GlStateManager.enableLighting();
+	        GlStateManager.enableTexture2D();
+	        OpenGlHelper.setLightmapTextureCoords(PBT, PBX, PBY);
+	        
 		}
 		GlStateManager.popMatrix();
 	}
+
+	private void branch(int x, int y, int z, int r, int g, int b, int Br, int h, VertexBuffer wr, Tessellator wrt){
+		wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
+		wr.pos(0, 0, 0).color(r, b, g, 255).endVertex();
+		wr.pos(1, 0, 0).color(r, b, g, 255).endVertex();
+		wr.pos(1, 1, 0).color(r, b, g, 255).endVertex();
+		wrt.draw();
+	}
+	
 }

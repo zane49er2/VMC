@@ -28,7 +28,7 @@ public class Rift extends BlockContainer {
 		super(Material.CLOTH);
 		setRegistryName(registryName);
 		setUnlocalizedName(getRegistryName().toString());
-		setLightLevel(1f);
+		//setLightLevel(1f);
 		setLightOpacity(0);
 		setHardness(1.0f);
 		setCreativeTab(ModTabs.rifts);
