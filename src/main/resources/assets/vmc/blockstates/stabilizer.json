@@ -3,9 +3,9 @@
 	"defaults": {
 		"model": "vmc:stabilizer",
 		"textures": {
- 			"texture": "vmc:blocks/Stabilizer",
+ 			"texture": "vmc:blocks/MachineEnergy",
  			"Cap": "vmc:blocks/MachineBase",
-  			"Side": "vmc:blocks/Stabilizer",
+  			"Side": "vmc:blocks/MachineEnergy",
   			"Rift": "vmc:blocks/Rift"
 		}
 	},
@@ -13,9 +13,9 @@
 		"normal": {
 			"model": "vmc:stabilizer",
         		"textures": {
- 				"texture": "vmc:blocks/Stabilizer",
+ 				"texture": "vmc:blocks/MachineEnergy",
  				"Cap": "vmc:blocks/MachineBase",
-  				"Side": "vmc:blocks/Stabilizer",
+  				"Side": "vmc:blocks/MachineEnergy",
    				"Rift": "vmc:blocks/Rift"
       			}
     		}
