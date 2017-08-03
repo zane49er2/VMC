@@ -17,9 +17,9 @@ public class RiftRenderer extends TileEntitySpecialRenderer<TileEntityRift> {
 		super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
 		GlStateManager.pushMatrix(); {
 
-			int r = te.r;
-			int g = te.g;
-			int b = te.b;
+			int r = te.r-1;
+			int g = te.g-1;
+			int b = te.b-1;
 			
 			float PBX = OpenGlHelper.lastBrightnessX;
 			float PBY = OpenGlHelper.lastBrightnessX;
