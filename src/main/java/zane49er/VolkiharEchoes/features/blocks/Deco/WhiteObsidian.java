@@ -25,7 +25,7 @@ public class WhiteObsidian extends Block {
 		super(Material.ROCK);
 		setRegistryName(registryName);
 		setUnlocalizedName(getRegistryName().toString());
-		setHardness(30.0f);
+		setHardness(100.0f);
 		setCreativeTab(ModTabs.decorative);
 	}
 
