@@ -37,18 +37,18 @@ public class RiftRenderer extends TileEntitySpecialRenderer<TileEntityRift> {
 	        OpenGlHelper.setLightmapTextureCoords(1, 240, 240);
 
 	        wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
-			wr.pos(0, 0, 0).color(r, b, g, 255).endVertex();
-			wr.pos(1, 0, 0).color(r, b, g, 255).endVertex();
-			wr.pos(1, 1, 0).color(r, b, g, 255).endVertex();
-			wr.pos(0, 1, 0).color(r, b, g, 255).endVertex();
+			wr.pos(0, 0, 0).color(r, g, b, 255).endVertex();
+			wr.pos(1, 0, 0).color(r, g, b, 255).endVertex();
+			wr.pos(1, 1, 0).color(r, g, b, 255).endVertex();
+			wr.pos(0, 1, 0).color(r, g, b, 255).endVertex();
 
 			wrt.draw();
 			
 	        wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
-			wr.pos(0, 0, 0).color(r, b, g, 255).endVertex();
-			wr.pos(0, 1, 0).color(r, b, g, 255).endVertex();
-			wr.pos(1, 1, 0).color(r, b, g, 255).endVertex();
-			wr.pos(1, 0, 0).color(r, b, g, 255).endVertex();
+			wr.pos(0, 0, 0).color(r, g, b, 255).endVertex();
+			wr.pos(0, 1, 0).color(r, g, b, 255).endVertex();
+			wr.pos(1, 1, 0).color(r, g, b, 255).endVertex();
+			wr.pos(1, 0, 0).color(r, g, b, 255).endVertex();
 			
 			wrt.draw();
 			
@@ -62,9 +62,9 @@ public class RiftRenderer extends TileEntitySpecialRenderer<TileEntityRift> {
 
 	private void branch(int x, int y, int z, int r, int g, int b, int Br, int h, VertexBuffer wr, Tessellator wrt){
 		wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
-		wr.pos(0, 0, 0).color(r, b, g, 255).endVertex();
-		wr.pos(1, 0, 0).color(r, b, g, 255).endVertex();
-		wr.pos(1, 1, 0).color(r, b, g, 255).endVertex();
+		wr.pos(0, 0, 0).color(r, g, b, 255).endVertex();
+		wr.pos(1, 0, 0).color(r, g, b, 255).endVertex();
+		wr.pos(1, 1, 0).color(r, g, b, 255).endVertex();
 		wrt.draw();
 	}
 	

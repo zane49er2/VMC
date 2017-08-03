@@ -40,12 +40,6 @@ public class TileEntityRift extends TileEntity {
 		this.r = compound.getInteger("red");
 		this.g = compound.getInteger("green");
 		this.b = compound.getInteger("blue");
-		if (this.r == 0) {
-			Random random = new Random();
-			this.r = random.nextInt(255)+1;
-			this.g = random.nextInt(255)+1;
-			this.b = random.nextInt(255)+1;
-		}
 	}
 
 	@Override
