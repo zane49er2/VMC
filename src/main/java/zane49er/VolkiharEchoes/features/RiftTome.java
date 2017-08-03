@@ -13,21 +13,25 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class RiftTome extends Item{
+public class RiftTome extends Item {
 
-	public RiftTome(String registryName){
+	public RiftTome(String registryName) {
 		setRegistryName(registryName);
 		setUnlocalizedName(getRegistryName().toString());
 		setMaxStackSize(1);
 		setCreativeTab(ModTabs.useful);
 	}
+
 	@Override
+	@SideOnly(Side.CLIENT)
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) {
-			playerIn.openGui(VolkiharEchoes.instance, ModGUIs.BOOK_LVL_1_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
-		}
+		// if (!worldIn.isRemote) {
+		playerIn.openGui(VolkiharEchoes.instance, ModGUIs.BOOK_LVL_1_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
+		// }
 		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
-	
+
 }

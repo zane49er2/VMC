@@ -17,12 +17,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Destabilizer extends Block {
 
-	//stored in NBT
+	// stored in NBT
 	boolean powered;
 	boolean enderFluid;
-	int size = 2;
-	
-	//should be in config
+	int size = 5;
+
+	// should be in config
 	int particleRows = 16;
 	int particleLayers = 8;
 
@@ -45,26 +45,26 @@ public class Destabilizer extends Block {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		// if (powered) {
-		for (double theta = 0; theta < Math.PI*2; theta+= Math.PI / (particleRows/2)) {
-			for (double phi = 0; phi < Math.PI; phi+= Math.PI / particleLayers) {
-				
-				double x = size * Math.cos(theta) * Math.sin(phi);
-				double y = size * Math.cos(phi);
-				double z = size * Math.sin(theta) * Math.sin(phi);
-				
-				//if (0 < Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2) && 5 > Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2)) {
+		if (worldIn.isBlockPowered(pos)) {
+			for (double theta = 0; theta < Math.PI * 2; theta += Math.PI / (particleRows / 2)) {
+				for (double phi = 0; phi < Math.PI; phi += Math.PI / particleLayers) {
+
+					double x = size * Math.cos(theta) * Math.sin(phi);
+					double y = size * Math.cos(phi);
+					double z = size * Math.sin(theta) * Math.sin(phi);
+
+					// if (0 < Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2)
+					// && 5 > Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))
+					// {
 					worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, (double) pos.getX() + 0.5 + x, (double) pos.getY() + 2.5 + y + size, (double) pos.getZ() + 0.5 + z, 0, 0, 0, new int[0]);
-				//}
+					// }
+				}
 			}
+		} else {
+			worldIn.spawnParticle(EnumParticleTypes.FLAME, (double) pos.getX() + 0.5, (double) pos.getY() + 2, (double) pos.getZ() + 0.5, 0, 0, 0, new int[0]);
+			super.randomDisplayTick(stateIn, worldIn, pos, rand);
 		}
 		super.randomDisplayTick(stateIn, worldIn, pos, rand);
-		/*
-		 * } else { worldIn.spawnParticle(EnumParticleTypes.FLAME, (double)
-		 * pos.getX() + 0.5, (double) pos.getY() + 2, (double) pos.getZ() + 0.5,
-		 * 0, 0, 0, new int[0]); super.randomDisplayTick(stateIn, worldIn, pos,
-		 * rand); }
-		 */
 	}
 
 	@Override
