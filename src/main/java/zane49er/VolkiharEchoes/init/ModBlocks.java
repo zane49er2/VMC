@@ -13,6 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import zane49er.VolkiharEchoes.features.blocks.Destabilizer;
 import zane49er.VolkiharEchoes.features.blocks.Rift;
 import zane49er.VolkiharEchoes.features.blocks.Stabilizer;
+import zane49er.VolkiharEchoes.features.blocks.Deco.WhiteObsidian;
 import zane49er.VolkiharEchoes.features.tileEntities.RiftRenderer;
 import zane49er.VolkiharEchoes.features.tileEntities.TileEntityRift;
 import zane49er.VolkiharEchoes.main.References;
@@ -22,17 +23,20 @@ public class ModBlocks {
 	public static Block rift;
 	public static Block stabilizer;
 	public static Block destabilizer;
+	public static Block whiteObsidian;
 	
 	public static void init() {
 		rift = new Rift("rift");
 		stabilizer = new Stabilizer("stabilizer");
 		destabilizer = new Destabilizer("destabilizer");
+		whiteObsidian = new WhiteObsidian("WhiteObsidian");
 	}
 
 	public static void register() {
 		registerBlock(rift);
 		registerBlock(stabilizer);
 		registerBlock(destabilizer);
+		registerBlock(whiteObsidian);
 	}
 	
 	private static void registerBlock(Block block) {
@@ -43,9 +47,10 @@ public class ModBlocks {
 	}
 
 	public static void registerRenders() {
-		registerRender(rift);
+		//registerRender(rift);
 		registerRender(stabilizer);
 		registerRender(destabilizer);
+		registerRender(whiteObsidian);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRift.class, new RiftRenderer());
 	}
 
