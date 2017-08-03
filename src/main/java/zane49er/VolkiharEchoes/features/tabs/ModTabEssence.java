@@ -1,4 +1,4 @@
-package zane49er.VolkiharEchoes.features;
+package zane49er.VolkiharEchoes.features.tabs;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

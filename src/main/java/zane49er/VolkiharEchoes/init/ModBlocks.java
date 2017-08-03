@@ -6,12 +6,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import zane49er.VolkiharEchoes.features.Destabilizer;
-import zane49er.VolkiharEchoes.features.Rift;
-import zane49er.VolkiharEchoes.features.Stabilizer;
+import zane49er.VolkiharEchoes.features.blocks.Destabilizer;
+import zane49er.VolkiharEchoes.features.blocks.Rift;
+import zane49er.VolkiharEchoes.features.blocks.Stabilizer;
+import zane49er.VolkiharEchoes.features.tileEntities.RiftRenderer;
+import zane49er.VolkiharEchoes.features.tileEntities.TileEntityRift;
 import zane49er.VolkiharEchoes.main.References;
 
 public class ModBlocks {
@@ -43,7 +46,12 @@ public class ModBlocks {
 		registerRender(rift);
 		registerRender(stabilizer);
 		registerRender(destabilizer);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRift.class, new RiftRenderer());
 	}
+
+
+	    
+	
 	
 	@SideOnly(Side.CLIENT)
 	public static void registerRender(Block block) {

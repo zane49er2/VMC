@@ -1,12 +1,14 @@
-package zane49er.VolkiharEchoes.features;
+package zane49er.VolkiharEchoes.features.blocks;
 
 import java.util.Random;
 
 import zane49er.VolkiharEchoes.init.ModTabs;
 import zane49er.VolkiharEchoes.main.VolkiharEchoes;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class Destabilizer extends Block {
+public class Destabilizer extends Block{
 
 	// stored in NBT
 	boolean powered;

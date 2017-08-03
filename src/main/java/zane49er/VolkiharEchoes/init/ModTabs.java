@@ -2,10 +2,10 @@ package zane49er.VolkiharEchoes.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import zane49er.VolkiharEchoes.features.ModTabDecorative;
-import zane49er.VolkiharEchoes.features.ModTabEssence;
-import zane49er.VolkiharEchoes.features.ModTabRifts;
-import zane49er.VolkiharEchoes.features.ModTabUseful;
+import zane49er.VolkiharEchoes.features.tabs.ModTabDecorative;
+import zane49er.VolkiharEchoes.features.tabs.ModTabEssence;
+import zane49er.VolkiharEchoes.features.tabs.ModTabRifts;
+import zane49er.VolkiharEchoes.features.tabs.ModTabUseful;
 
 public class ModTabs {
 

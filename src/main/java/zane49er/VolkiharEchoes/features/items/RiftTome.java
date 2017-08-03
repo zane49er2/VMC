@@ -1,4 +1,4 @@
-package zane49er.VolkiharEchoes.features;
+package zane49er.VolkiharEchoes.features.items;
 
 import zane49er.VolkiharEchoes.init.ModGUIs;
 import zane49er.VolkiharEchoes.init.ModTabs;
@@ -28,9 +28,9 @@ public class RiftTome extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		// if (!worldIn.isRemote) {
-		playerIn.openGui(VolkiharEchoes.instance, ModGUIs.BOOK_LVL_1_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
-		// }
+		if (!worldIn.isRemote) {
+			playerIn.openGui(VolkiharEchoes.instance, ModGUIs.BOOK_LVL_1_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
+		}
 		return super.onItemUse(stack, playerIn, worldIn, pos, hand, facing, hitX, hitY, hitZ);
 	}
 

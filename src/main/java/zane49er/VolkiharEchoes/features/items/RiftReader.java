@@ -1,4 +1,4 @@
-package zane49er.VolkiharEchoes.features;
+package zane49er.VolkiharEchoes.features.items;
 
 import zane49er.VolkiharEchoes.init.ModTabs;
 import zane49er.VolkiharEchoes.main.References;

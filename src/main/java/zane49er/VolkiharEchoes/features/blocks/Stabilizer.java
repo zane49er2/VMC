@@ -1,4 +1,4 @@
-package zane49er.VolkiharEchoes.features;
+package zane49er.VolkiharEchoes.features.blocks;
 
 import java.util.List;
 import java.util.Random;

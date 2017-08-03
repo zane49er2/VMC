@@ -1,17 +1,20 @@
-package zane49er.VolkiharEchoes.features;
+package zane49er.VolkiharEchoes.features.blocks;
 
 import java.util.List;
 import java.util.Random;
 
+import zane49er.VolkiharEchoes.features.tileEntities.TileEntityRift;
 import zane49er.VolkiharEchoes.init.ModItems;
 import zane49er.VolkiharEchoes.init.ModTabs;
 import zane49er.VolkiharEchoes.main.References;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -19,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class Rift extends Block {
+public class Rift extends BlockContainer {
 
 	public Rift(String registryName) {
 		super(Material.CLOTH);
@@ -69,6 +72,11 @@ public class Rift extends Block {
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState p_getCollisionBoundingBox_1_, World p_getCollisionBoundingBox_2_, BlockPos p_getCollisionBoundingBox_3_) {
 		return null;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileEntityRift();
 	}
 
 	/*

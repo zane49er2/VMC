@@ -11,3 +11,9 @@ tile.vmc:destabilizer.name=Destabilizer Module
 item.vmc:essence.name=Clear Essence
 item.vmc:rift_tome.name=Rift Tome
 item.vmc:rift_reader.name=Rift Reader
+
+itemGroup.TabRifts.name=Rifts
+itemGroup.TabEssence.name=Essences
+itemGroup.TabUseful.name=VMC items and blocks
+itemGroup.TabCrafting.name=VMC crafting items
+itemGroup.TabDecorative.name=Decorative VMC blocks

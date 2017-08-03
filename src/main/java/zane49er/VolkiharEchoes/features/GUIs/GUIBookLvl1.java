@@ -1,4 +1,4 @@
-package zane49er.VolkiharEchoes.features;
+package zane49er.VolkiharEchoes.features.GUIs;
 
 import java.io.IOException;
 

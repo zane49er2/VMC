@@ -1,6 +1,6 @@
 package zane49er.VolkiharEchoes.init;
 
-import zane49er.VolkiharEchoes.features.WorldGenRifts;
+import zane49er.VolkiharEchoes.features.worldGen.WorldGenRifts;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

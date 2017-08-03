@@ -1,6 +1,6 @@
 package zane49er.VolkiharEchoes.main;
 
-import zane49er.VolkiharEchoes.features.ModTabUseful;
+import zane49er.VolkiharEchoes.features.tabs.ModTabUseful;
 import zane49er.VolkiharEchoes.init.ModBlocks;
 import zane49er.VolkiharEchoes.init.ModItems;
 import zane49er.VolkiharEchoes.init.ModTabs;
@@ -37,6 +37,7 @@ public class VolkiharEchoes {
 		ModBlocks.register();
 		ModWorldGen.init();
 		proxy.registerRenders();
+		proxy.init();
 	}
 	
 	@EventHandler
