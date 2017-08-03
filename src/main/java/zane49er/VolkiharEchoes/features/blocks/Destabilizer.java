@@ -47,7 +47,7 @@ public class Destabilizer extends Block{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (worldIn.isBlockPowered(pos)) {
+		if (!worldIn.isBlockPowered(pos)) {
 			for (double theta = 0; theta < Math.PI * 2; theta += Math.PI / (particleRows / 2)) {
 				for (double phi = 0; phi < Math.PI; phi += Math.PI / particleLayers) {
 
@@ -58,12 +58,12 @@ public class Destabilizer extends Block{
 					// if (0 < Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2)
 					// && 5 > Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2))
 					// {
-					worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, (double) pos.getX() + 0.5 + x, (double) pos.getY() + 2.5 + y + size, (double) pos.getZ() + 0.5 + z, 0, 0, 0, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.DRAGON_BREATH, true, (double) pos.getX() + 0.5 + x, (double) pos.getY() + 2.5 + y + size, (double) pos.getZ() + 0.5 + z, 0, 0, 0, new int[0]);
 					// }
 				}
 			}
 		} else {
-			worldIn.spawnParticle(EnumParticleTypes.FLAME, (double) pos.getX() + 0.5, (double) pos.getY() + 2, (double) pos.getZ() + 0.5, 0, 0, 0, new int[0]);
+			worldIn.spawnParticle(EnumParticleTypes.FLAME, true, (double) pos.getX() + 0.5, (double) pos.getY() + 2, (double) pos.getZ() + 0.5, 0, 0, 0, new int[0]);
 			super.randomDisplayTick(stateIn, worldIn, pos, rand);
 		}
 		super.randomDisplayTick(stateIn, worldIn, pos, rand);

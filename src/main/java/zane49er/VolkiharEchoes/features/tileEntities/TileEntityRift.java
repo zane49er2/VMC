@@ -1,13 +1,19 @@
 package zane49er.VolkiharEchoes.features.tileEntities;
 
+import java.util.Random;
+
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityRift extends TileEntity{
 	
-	public int r = 255;
-	public int g = 0;
-	public int b = 0;
+	Random random = new Random();
+	
+	public int r = random.nextInt(255);
+	public int g = random.nextInt(255);
+	public int b = random.nextInt(255);
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -25,4 +31,10 @@ public class TileEntityRift extends TileEntity{
 		this.g = compound.getInteger("green");
 		this.b = compound.getInteger("blue");
 	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		super.onDataPacket(net, pkt);
+	}
+	
 }
