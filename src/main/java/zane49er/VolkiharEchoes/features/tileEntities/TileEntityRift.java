@@ -58,5 +58,10 @@ public class TileEntityRift extends TileEntity {
 	public void handleUpdateTag(NBTTagCompound tag) {
 		this.readFromNBT(tag);
 	}
+	 
+	@Override
+	public double getMaxRenderDistanceSquared() {
+		return 65536;
+	}
 
 }

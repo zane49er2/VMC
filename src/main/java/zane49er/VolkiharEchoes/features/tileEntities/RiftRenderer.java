@@ -65,7 +65,7 @@ public class RiftRenderer extends TileEntitySpecialRenderer<TileEntityRift> {
 	public boolean isGlobalRenderer(TileEntityRift te) {
 		return true;
 	}
-
+	
 	private void branch(int x, int y, int z, int r, int g, int b, int Br, int h, VertexBuffer wr, Tessellator wrt) {
 		wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
 		wr.pos(0, 0, 0).color(r, g, b, 255).endVertex();
