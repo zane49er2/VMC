@@ -22,12 +22,47 @@ import zane49er.VolkiharEchoes.main.References;
 
 public class ModBlocks {
 	
+	//special -------------------
+
+	//energy sources
 	public static Block rift;
+	public static Block essenceOrb;//TODO makes fucused and pure essence
+	public static Block wormholer;//TODO allows transport of existing rifts or essenceOrbs
+	
+	//rift machines
 	public static Block stabilizer;
 	public static Block destabilizer;
+	
+	public static Block gasifier;//TODO makes the plasma that flows through laser networks
+	public static Block liquifier;//TODO makes the goop that powers highest lvl machines
+	public static Block condensator;//TODO makes essence items without destroying rift
+	
+	public static Block essenceLaser;//TODO transports plasma
+	public static Block essenceDuct;//TODO transports goop (limited distance)
+	
+	public static Block soulCrusher;//TODO makes essence out of soul gems, can explode if overloaded
+	
+	public static Block chargePuller;//TODO RF generator
+	
+	//alchemy
+	public static Block alchemyFrame;//TODO outside of engine, glass and solid variant
+	public static Block vaccuum;//TODO inside of engine, can contain reactants
+	public static Block alchemyRune;//TODO outside of engine, most variants
+	public static Block alchemyComputer;//TODO outside of engine, determines what signals to send based on presets
+	
+	
+	//-------DECO-------DECO-------DECO-------DECO-------DECO-------DECO-------DECO-------DECO-------
+	
+	//white obsidian
 	public static Block whiteObsidian;
 	public static Block whiteObsidianBricks;
 	public static Block whiteObsidianSmooth;
+	public static Block whiteObsidianSlab;//TODO
+	public static Block whiteObsidianStairs;//TODO
+	public static Block whiteObsidianSlabBricks;//TODO
+	public static Block whiteObsidianStairsBricks;//TODO
+	public static Block whiteObsidianSlabSmooth;//TODO
+	public static Block runicObsidan;//TODO
 	
 	public static void init() {
 		rift = new Rift("rift");
