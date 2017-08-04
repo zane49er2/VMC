@@ -14,6 +14,8 @@ import zane49er.VolkiharEchoes.features.blocks.Destabilizer;
 import zane49er.VolkiharEchoes.features.blocks.Rift;
 import zane49er.VolkiharEchoes.features.blocks.Stabilizer;
 import zane49er.VolkiharEchoes.features.blocks.Deco.WhiteObsidian;
+import zane49er.VolkiharEchoes.features.blocks.Deco.WhiteObsidianBricks;
+import zane49er.VolkiharEchoes.features.blocks.Deco.WhiteObsidianSmooth;
 import zane49er.VolkiharEchoes.features.tileEntities.RiftRenderer;
 import zane49er.VolkiharEchoes.features.tileEntities.TileEntityRift;
 import zane49er.VolkiharEchoes.main.References;
@@ -24,12 +26,16 @@ public class ModBlocks {
 	public static Block stabilizer;
 	public static Block destabilizer;
 	public static Block whiteObsidian;
+	public static Block whiteObsidianBricks;
+	public static Block whiteObsidianSmooth;
 	
 	public static void init() {
 		rift = new Rift("rift");
 		stabilizer = new Stabilizer("stabilizer");
 		destabilizer = new Destabilizer("destabilizer");
 		whiteObsidian = new WhiteObsidian("WhiteObsidian");
+		whiteObsidianBricks = new WhiteObsidianBricks("WhiteObsidianBricks");
+		whiteObsidianSmooth = new WhiteObsidianSmooth("WhiteObsidianSmooth");
 	}
 
 	public static void register() {
@@ -37,6 +43,8 @@ public class ModBlocks {
 		registerBlock(stabilizer);
 		registerBlock(destabilizer);
 		registerBlock(whiteObsidian);
+		registerBlock(whiteObsidianBricks);
+		registerBlock(whiteObsidianSmooth);
 	}
 	
 	private static void registerBlock(Block block) {
@@ -51,6 +59,8 @@ public class ModBlocks {
 		registerRender(stabilizer);
 		registerRender(destabilizer);
 		registerRender(whiteObsidian);
+		registerRender(whiteObsidianBricks);
+		registerRender(whiteObsidianSmooth);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRift.class, new RiftRenderer());
 	}
 

@@ -1,5 +1,5 @@
 {
-    "parent":"tutorial:block/WhiteObsidian",
+    "parent":"vmc:block/WhiteObsidian",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

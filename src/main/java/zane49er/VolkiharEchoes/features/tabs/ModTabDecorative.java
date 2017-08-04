@@ -13,7 +13,7 @@ public class ModTabDecorative extends CreativeTabs{
 	
 	@Override
 	public Item getTabIconItem() {
-		return Item.getItemFromBlock(ModBlocks.whiteObsidian);
+		return Item.getItemFromBlock(ModBlocks.whiteObsidianBricks);
 	}
 
 }

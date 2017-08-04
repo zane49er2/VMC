@@ -1,0 +1,70 @@
+{
+"__comment": "Designed by Zane49er with BDcraft Cubik PRO 0.96 Beta - http://bdcraft.net",
+"textures": {
+    "Front": "blocks/RunicObsidianHorizontal",
+    "Side": "blocks/WhiteObsidian",
+    "Cap": "blocks/WhiteObsidian"
+},
+"elements": [ 
+{
+    "from": [ 0, 0, 0 ],
+    "to": [ 16, 16, 8 ],
+    "faces": {
+        "down":  { "uv": [ 16, 8, 0, 0 ], "texture": "#cap" },
+        "up":    { "uv": [ 0, 0, 16, 8 ], "texture": "#cap" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#side" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#front" },
+        "west":  { "uv": [ 0, 0, 8, 16 ], "texture": "#side" },
+        "east":  { "uv": [ 8, 0, 16, 16 ], "texture": "#side" }
+    }
+},
+{
+    "from": [ 0, 13, 8 ],
+    "to": [ 16, 16, 9 ],
+    "faces": {
+        "down":  { "uv": [ 16, 9, 0, 8 ], "texture": "#cap" },
+        "up":    { "uv": [ 0, 8, 16, 9 ], "texture": "#cap" },
+        "north": { "uv": [ 0, 0, 16, 3 ], "texture": "#side" },
+        "south": { "uv": [ 0, 0, 16, 3 ], "texture": "#front" },
+        "west":  { "uv": [ 8, 0, 9, 3 ], "texture": "#side" },
+        "east":  { "uv": [ 7, 0, 8, 3 ], "texture": "#side" }
+    }
+},
+{
+    "from": [ 0, 0, 8 ],
+    "to": [ 16, 3, 9 ],
+    "faces": {
+        "down":  { "uv": [ 16, 9, 0, 8 ], "texture": "#cap" },
+        "up":    { "uv": [ 0, 8, 16, 9 ], "texture": "#cap" },
+        "north": { "uv": [ 0, 13, 16, 16 ], "texture": "#side" },
+        "south": { "uv": [ 0, 13, 16, 16 ], "texture": "#front" },
+        "west":  { "uv": [ 8, 13, 9, 16 ], "texture": "#side" },
+        "east":  { "uv": [ 7, 13, 8, 16 ], "texture": "#side" }
+    }
+},
+{
+    "from": [ 0, 9, 8 ],
+    "to": [ 16, 11, 9 ],
+    "faces": {
+        "down":  { "uv": [ 16, 9, 0, 8 ], "texture": "#cap" },
+        "up":    { "uv": [ 0, 8, 16, 9 ], "texture": "#cap" },
+        "north": { "uv": [ 0, 5, 16, 7 ], "texture": "#side" },
+        "south": { "uv": [ 0, 5, 16, 7 ], "texture": "#front" },
+        "west":  { "uv": [ 8, 5, 9, 7 ], "texture": "#side" },
+        "east":  { "uv": [ 7, 5, 8, 7 ], "texture": "#side" }
+    }
+},
+{
+    "from": [ 0, 5, 8 ],
+    "to": [ 16, 7, 9 ],
+    "faces": {
+        "down":  { "uv": [ 16, 9, 0, 8 ], "texture": "#cap" },
+        "up":    { "uv": [ 0, 8, 16, 9 ], "texture": "#cap" },
+        "north": { "uv": [ 0, 9, 16, 11 ], "texture": "#side" },
+        "south": { "uv": [ 0, 9, 16, 11 ], "texture": "#front" },
+        "west":  { "uv": [ 8, 9, 9, 11 ], "texture": "#side" },
+        "east":  { "uv": [ 7, 9, 8, 11 ], "texture": "#side" }
+    }
+}
+]
+}
