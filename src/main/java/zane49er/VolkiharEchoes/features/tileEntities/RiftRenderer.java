@@ -45,14 +45,20 @@ public class RiftRenderer extends TileEntitySpecialRenderer<TileEntityRift> {
 
 			wrt.draw();
 
-			wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
+			/*wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
 			wr.pos(0, 0, 0).color(r, g, b, 255).endVertex();
 			wr.pos(0, 1, 0).color(r, g, b, 255).endVertex();
 			wr.pos(1, 1, 0).color(r, g, b, 255).endVertex();
 			wr.pos(1, 0, 0).color(r, g, b, 255).endVertex();
 
-			wrt.draw();
+			wrt.draw();*/
 
+			int size = 1;
+			
+			for(int i =0;i<size;i++){
+				branch(r,g,b,size,0, 0, new int[3], wr, wrt);
+			}
+			
 			GlStateManager.enableLighting();
 			GlStateManager.enableTexture2D();
 			OpenGlHelper.setLightmapTextureCoords(PBT, PBX, PBY);
@@ -66,7 +72,7 @@ public class RiftRenderer extends TileEntitySpecialRenderer<TileEntityRift> {
 		return true;
 	}
 	
-	private void branch(int x, int y, int z, int r, int g, int b, int Br, int h, VertexBuffer wr, Tessellator wrt) {
+	private void branch(int r, int g, int b, int l, int phi, int theta, int[] branches, VertexBuffer wr, Tessellator wrt) {
 		wr.begin(7, DefaultVertexFormats.POSITION_COLOR);
 		wr.pos(0, 0, 0).color(r, g, b, 255).endVertex();
 		wr.pos(1, 0, 0).color(r, g, b, 255).endVertex();

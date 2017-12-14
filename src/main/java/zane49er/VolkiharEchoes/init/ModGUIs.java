@@ -1,6 +1,6 @@
 package zane49er.VolkiharEchoes.init;
 
-import zane49er.VolkiharEchoes.features.GUIs.GUIBookLvl1;
+import zane49er.VolkiharEchoes.features.GUIs.book.GUIBookLvl1;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;

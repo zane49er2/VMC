@@ -64,6 +64,9 @@ public class ModBlocks {
 	public static Block whiteObsidianSlabSmooth;//TODO
 	public static Block runicObsidan;//TODO
 	
+	
+	//-----REGISTRY------------REGISTRY------------REGISTRY------------REGISTRY------------
+	
 	public static void init() {
 		rift = new Rift("rift");
 		stabilizer = new Stabilizer("stabilizer");
