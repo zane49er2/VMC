@@ -176,20 +176,20 @@ public class GUIBookLvl1 extends GuiScreen {
 					borderSize = 1.5f;
 					break;
 				}
+				GlStateManager.disableLighting();
+				GlStateManager.enableCull();
+				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
 				GlStateManager.scale(b.scale, b.scale, b.scale);
 				this.drawTexturedModalRect(0, 0, 36 * b.bgType, GUIHeight, 36, 36);
 
-				GlStateManager.disableLighting();
-				GlStateManager.enableCull();
 
 				GlStateManager.translate(36 / 2, 36 / 2, 0);
 				GlStateManager.scale(borderSize, borderSize, borderSize);
 				GlStateManager.translate(-16 / 2, -16 / 2, 0);
 
 				this.itemRender.renderItemAndEffectIntoGUI(new ItemStack(b.item), 0, 0);
-				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-				GlStateManager.disableLighting();
+
 
 			} else {
 				b.hovering = false;
