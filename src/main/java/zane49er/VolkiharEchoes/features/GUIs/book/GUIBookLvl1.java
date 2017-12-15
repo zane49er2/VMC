@@ -1,21 +1,25 @@
 package zane49er.VolkiharEchoes.features.GUIs.book;
 
-import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
+import java.util.Scanner;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Achievement;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+
+import org.lwjgl.input.Mouse;
+
 import zane49er.VolkiharEchoes.init.ModItems;
 import zane49er.VolkiharEchoes.main.References;
 
@@ -23,15 +27,18 @@ public class GUIBookLvl1 extends GuiScreen {
 
 	// global
 	private Random random = new Random();
-	private GuiButton home;
+	private GuiButton home;// return to top page
+	private GuiButton bookmark;// set start page (when book is next opened)
+	private GuiButton settings;
 	// private GuiButton b;
-	private int xScroll = 0;
-	private int yScroll = 0;
+	private int xScroll = width / 2;
+	private int yScroll = height / 2;
 	private int pMouseX = 0;
 	private int pMouseY = 0;
 	private int pxScroll = 0;
 	private int pyScroll = 0;
-	private String pageID = "getting_started";
+	private String pageID = "home";
+	private String pageName;
 	private int scrolling;
 
 	private ArrayList<BookSymbol> particles = new ArrayList<BookSymbol>();
@@ -43,8 +50,8 @@ public class GUIBookLvl1 extends GuiScreen {
 	int top;
 
 	// page info
-	private String page = "getting started";
 	private ArrayList<BookItem> bItems = new ArrayList<BookItem>();
+	BufferedReader pageData;
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -72,7 +79,7 @@ public class GUIBookLvl1 extends GuiScreen {
 
 		drawTexturedModalRect(left, top, 0, 0, GUIWidth, GUIHeight);
 
-		drawString(fontRendererObj, page, left + 10, top + 10, 0x00FFAA);
+		drawString(fontRendererObj, pageName, left + 10, top + 10, 0x00FFAA);
 
 		super.drawScreen(mouseX, mouseY, partialTicks);
 
@@ -86,7 +93,7 @@ public class GUIBookLvl1 extends GuiScreen {
 					GlStateManager.enableAlpha();
 					GlStateManager.enableBlend();
 					Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-					if (s.age < 50&&!(s.noFadeIn&&!s.disappearing)) GlStateManager.color(s.r, s.g, s.b, (float) s.age / 100);
+					if (s.age < 50 && !(s.noFadeIn && !s.disappearing)) GlStateManager.color(s.r, s.g, s.b, (float) s.age / 100);
 					else GlStateManager.color(s.r, s.g, s.b, 0.5F);
 					drawTexturedModalRect(s.x, s.y, s.u, s.v, 16, 16);
 				}
@@ -129,82 +136,98 @@ public class GUIBookLvl1 extends GuiScreen {
 		// Page links/items
 		for (int i = 0; i < bItems.size(); i++) {
 			BookItem b = bItems.get(i);
-			GlStateManager.pushMatrix();
-			/*
-			 * GlStateManager.translate(b.x - scrollX, b.y - scrollY, 0);
-			 * GlStateManager.scale(b.scale, b.scale, b.scale);
-			 * mc.getRenderItem().renderItemIntoGUI(new ItemStack(b.item), 0,
-			 * 0); GlStateManager.popMatrix();
-			 */
-
 			int Tx = (int) (b.x) + xScroll;
 			int Ty = (int) (b.y) + yScroll;
-			
-			//draw
-			if (Tx >= left && Ty >= top && Tx <= left + GUIWidth && (float) Ty <= top + GUIHeight) {
+			float selSpeed = 0.05f;
+
+			// draw
+			GlStateManager.pushMatrix();
+			if (Tx >= left && Ty >= top && Tx <= left + GUIWidth - 36 * b.scale && (float) Ty <= top + GUIHeight - 36 * b.scale) {
+				// selection detection
+				if (mouseX > Tx && mouseY > Ty && mouseX < Tx + 36 * b.scale && mouseY < Ty + 36 * b.scale) {
+					b.hovering = true;
+					b.r += selSpeed * (b.rSel - b.r);
+					b.g += selSpeed * (b.gSel - b.g);
+					b.b += selSpeed * (b.bSel - b.b);
+				} else {
+					b.hovering = false;
+					b.r += selSpeed * (b.rn - b.r);
+					b.g += selSpeed * (b.gn - b.g);
+					b.b += selSpeed * (b.bn - b.b);
+				}
 
 				this.mc.getTextureManager().bindTexture(texture);
 
 				GlStateManager.enableBlend();
 				GlStateManager.translate(Tx, Ty, 0);
 				GlStateManager.color(b.r, b.g, b.b, 1.0F);
-				float borderSize=1f;
-				switch(b.bgType){
+				float borderSize = 1f;
+				switch (b.bgType) {
 				case 0:
-					borderSize=2f;
+					borderSize = 2f;
 					break;
 				case 1:
-					borderSize=1.3f;
+					borderSize = 1.3f;
 					break;
 				case 2:
-					borderSize=1f;
+					borderSize = 1f;
 					break;
 				case 3:
-					borderSize=1.5f;
+					borderSize = 1.5f;
 					break;
 				}
-				
+
 				GlStateManager.scale(b.scale, b.scale, b.scale);
 				this.drawTexturedModalRect(0, 0, 36 * b.bgType, GUIHeight, 36, 36);
 
 				GlStateManager.disableLighting();
 				GlStateManager.enableCull();
-				
+
 				GlStateManager.translate(36 / 2, 36 / 2, 0);
 				GlStateManager.scale(borderSize, borderSize, borderSize);
 				GlStateManager.translate(-16 / 2, -16 / 2, 0);
-				
+
 				this.itemRender.renderItemAndEffectIntoGUI(new ItemStack(b.item), 0, 0);
 				GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 				GlStateManager.disableLighting();
 
 			} else {
-				//explode
+				b.hovering = false;
+				// explode		
 				int Px = (int) (b.x) + pxScroll;
 				int Py = (int) (b.y) + pyScroll;
 
-				if (Px >= left && Py >= top && Px <= left + GUIWidth && (float) Py <= top + GUIHeight) {
-					for (int j = 0; j < random.nextInt(50) + 5; j++) {
+				if (Px >= left && Py >= top && Px <= left + GUIWidth - 36 * b.scale && (float) Py <= top + GUIHeight - 36 * b.scale) {
+					for (int j = 0; j < (random.nextInt(100) + 15) * b.scale; j++) {
 						BookSymbol s = new BookSymbol();
-						s.x = Px;
-						s.y = Py;
 						s.u = (random.nextInt(5) * 16) + 170;
 						s.v = random.nextInt(3) * 16;
-						if (Px < left + 5) s.xv = -random.nextInt(100);
-						if (Px > left + GUIWidth - 5) s.xv = random.nextInt(100);
-						if (Py < top + 5) s.yv = -random.nextInt(100);
-						if (Py > top + GUIHeight - 5) s.yv = random.nextInt(100);
-						s.r = 0;
-						s.g = 1;
-						s.b = 0.5f;
+						s.xv = (xScroll - pxScroll) * 10 + random.nextInt(50) - 25;
+						s.yv = (yScroll - pyScroll) * 10 + random.nextInt(50) - 25;
+
+						s.x = Px + random.nextInt((int) (36 * b.scale));
+						s.y = Py + random.nextInt((int) (36 * b.scale));
+
+						s.r = b.r;
+						s.g = b.g;
+						s.b = b.b;
 						s.age = 1;
-						s.noFadeIn=true;
+						s.noFadeIn = true;
 						particles.add(s);
 					}
 				}
 			}
 			GlStateManager.popMatrix();
+			// tooltip
+			if (b.hovering) {
+				List<String> j = new ArrayList<String>();
+				j.add(b.name);
+				GlStateManager.pushMatrix();
+				drawHoveringText(j, mouseX, mouseY, fontRendererObj);
+				GlStateManager.popMatrix();
+			}
 
+			// update previous scroll
 			this.pxScroll = xScroll;
 			this.pyScroll = yScroll;
 
@@ -220,25 +243,73 @@ public class GUIBookLvl1 extends GuiScreen {
 		// this.height / 2 + 4, "This is button b"));
 		left = (width / 2) - (GUIWidth / 2);
 		top = (height / 2) - (GUIHeight / 2);
-
-		BookItem b = new BookItem();
-		// b.x = random.nextInt(GUIWidth) + left;
-		// b.y = random.nextInt(GUIHeight) + top;
-		b.x = left;
-		b.y = top;
-		b.item = ModItems.essence;
-		b.scale = 2f;
-		b.link = "Getting_started";
-		b.bgType =3;
-		b.r=0;
-		b.g=1;
-		b.b=0.5f;
-		bItems.add(b);
-
+		try {
+			refresh();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	void refresh() {
-		// place new page
+	void refresh() throws IOException {
+		// delete old page
+		for (int i = 0; i < bItems.size(); i++) {
+			BookItem b = bItems.get(i);
+			int Px = (int) (b.x) + pxScroll;
+			int Py = (int) (b.y) + pyScroll;
+			if (Px >= left && Py >= top && Px <= left + GUIWidth - 36 * b.scale && (float) Py <= top + GUIHeight - 36 * b.scale) {
+				for (int j = 0; j < (random.nextInt(100) + 15) * b.scale; j++) {
+					BookSymbol s = new BookSymbol();
+					s.u = (random.nextInt(5) * 16) + 170;
+					s.v = random.nextInt(3) * 16;
+					s.xv = (xScroll - pxScroll) * 10 + random.nextInt(50) - 25;
+					s.yv = (yScroll - pyScroll) * 10 + random.nextInt(50) - 25;
+
+					s.x = Px + random.nextInt((int) (36 * b.scale));
+					s.y = Py + random.nextInt((int) (36 * b.scale));
+
+					s.r = b.r;
+					s.g = b.g;
+					s.b = b.b;
+					s.disappearing = true;
+					particles.add(s);
+					s.age = 50;
+				}
+			}
+		}
+		bItems.clear();
+
+		// load new one
+		pageData = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("assets/vmc/BookPages/"+pageID+".txt"), "UTF-8"));
+
+		pageName = pageData.readLine();
+
+		while (pageData.ready()) {
+			//pageData.readLine();//skip one
+			BookItem b = new BookItem();
+			b.x = Integer.parseInt(pageData.readLine());
+			b.y = Integer.parseInt(pageData.readLine());
+			b.item = Item.getByNameOrId(pageData.readLine());
+			b.scale = Float.parseFloat(pageData.readLine());
+			b.link = pageData.readLine();
+			b.bgType = Integer.parseInt(pageData.readLine());
+			b.r = Float.parseFloat(pageData.readLine());
+			b.g = Float.parseFloat(pageData.readLine());
+			b.b = Float.parseFloat(pageData.readLine());
+			b.rn = Float.parseFloat(pageData.readLine());
+			b.gn = Float.parseFloat(pageData.readLine());
+			b.bn = Float.parseFloat(pageData.readLine());
+			b.rSel = Float.parseFloat(pageData.readLine());
+			b.gSel = Float.parseFloat(pageData.readLine());
+			b.bSel = Float.parseFloat(pageData.readLine());
+			b.name = pageData.readLine();
+			bItems.add(b);
+		}
+		
+		//reset cam
+		xScroll = width / 2;
+		yScroll = height / 2;
+
 	}
 
 	@Override

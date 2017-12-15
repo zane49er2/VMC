@@ -35,5 +35,9 @@ public class BookSymbol {
 				age = 50;
 			}
 		}
+		/*colorize
+		r+=random.nextInt(60)-30;
+		r+=random.nextInt(60)-30;
+		r+=random.nextInt(60)-30;*/
 	}
 }
