@@ -12,21 +12,31 @@
             "g": 1,
             "b": 0.5
         },
-
         "returnColor": {
             "r": 0,
             "g": 1,
             "b": 0.5
         },
-
         "selectorColor": {
             "r": 1,
             "g": 0.3,
             "b": 1
         },
-
         "text": {
             "line0": "Go Back"
+        }
+    },
+    "text0": {
+        "x": 0,
+        "y": 0,
+        "scale": 1,
+        "color": {
+            "r": "",
+            "g": "",
+            "b": ""
+        },
+        "text": {
+            "line0": "E"
         }
     }
 }

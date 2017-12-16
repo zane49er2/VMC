@@ -50,7 +50,7 @@ public class GUIBookLvl1 extends GuiScreen {
 
 	// page info
 	private ArrayList<BookItem> bItems = new ArrayList<BookItem>();
-	BufferedReader pageData;
+	private ArrayList<BookText> bText = new ArrayList<BookText>();
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -243,7 +243,26 @@ public class GUIBookLvl1 extends GuiScreen {
 			this.pyScroll = yScroll;
 
 		}
-
+		// text
+		for (int i = 0; i < bText.size(); i++) {
+			BookText b = bText.get(i);
+			int Tx = (int) (b.x) + xScroll;
+			int Ty = (int) (b.y) + yScroll;
+			{
+				
+				for (int j = 0; j < b.text.size(); j++) {
+					for (int k = 0; k<b.text.get(j).length();k++){
+						int cx=(int) (Tx+(10*k*b.scale));
+						int cy=(int) (Ty+(15*j*b.scale));
+						GlStateManager.pushMatrix();
+						GlStateManager.translate(cx, cy, 0);
+						GlStateManager.scale(b.scale, b.scale, b.scale);
+						if(cx>left&&cy>top&&cx<left+GUIWidth&&cy<top+GUIHeight) drawString(fontRendererObj, String.valueOf(b.text.get(j).charAt(k)), 0, 0, 0xFFFFFF);
+						GlStateManager.popMatrix();
+					}
+				}
+			}
+		}
 	}
 
 	public void initGui() {
@@ -334,57 +353,32 @@ public class GUIBookLvl1 extends GuiScreen {
 			bItems.add(b);
 			i++;
 		}
+		// text
+		i=0;
 		while (pageData.has("text" + i)) {
-			JsonObject c = pageData.get("item" + i).getAsJsonObject();
-			JsonObject col;
-			BookItem b = new BookItem();
+			JsonObject c = pageData.get("text" + i).getAsJsonObject();
+			JsonObject col = c.get("color").getAsJsonObject();
+			BookText b = new BookText();
 			b.x = c.get("x").getAsInt();
 			b.y = c.get("y").getAsInt();
-			b.item = Item.getByNameOrId(c.get("Image").getAsString());
 			b.scale = c.get("scale").getAsFloat();
-			b.link = c.get("link").getAsString();
-			b.bgType = c.get("bgType").getAsInt();
 			// colors
-			col = c.get("color").getAsJsonObject();
-			b.rc = col.get("r").getAsInt();
-			b.gc = col.get("g").getAsInt();
-			b.bc = col.get("b").getAsInt();
-			col = c.get("returnColor").getAsJsonObject();
-			b.rn = col.get("r").getAsInt();
-			b.gn = col.get("g").getAsInt();
-			b.bn = col.get("b").getAsInt();
-			col = c.get("selectorColor").getAsJsonObject();
-			b.rs = col.get("r").getAsInt();
-			b.gs = col.get("g").getAsInt();
-			b.bs = col.get("b").getAsInt();
-			// text
+			b.r = col.get("r").getAsFloat();
+			b.g = col.get("g").getAsFloat();
+			b.b = col.get("b").getAsFloat();
+			// contents
 			JsonObject t = c.get("text").getAsJsonObject();
 			int j = 0;
+			//System.out.println(t.has("line1"));
 			while (t.has("line" + j)) {
 				b.text.add(t.get("line" + j).getAsString());
 				j++;
 			}
-			bItems.add(b);
+			//System.out.println(b.text);
+			bText.add(b);
 			i++;
 		}
-		// text
-		// detail
-
-		/*
-		 * b.item = Item.getByNameOrId(pageData.readLine()); b.scale =
-		 * Float.parseFloat(pageData.readLine()); b.link = pageData.readLine();
-		 * b.bgType = Integer.parseInt(pageData.readLine()); b.r =
-		 * Float.parseFloat(pageData.readLine()); b.g =
-		 * Float.parseFloat(pageData.readLine()); b.b =
-		 * Float.parseFloat(pageData.readLine()); b.rn =
-		 * Float.parseFloat(pageData.readLine()); b.gn =
-		 * Float.parseFloat(pageData.readLine()); b.bn =
-		 * Float.parseFloat(pageData.readLine()); b.rSel =
-		 * Float.parseFloat(pageData.readLine()); b.gSel =
-		 * Float.parseFloat(pageData.readLine()); b.bSel =
-		 * Float.parseFloat(pageData.readLine()); b.name = pageData.readLine();
-		 * bItems.add(b); }
-		 */
+		// details
 
 		// reset cam
 		xScroll = width / 2;

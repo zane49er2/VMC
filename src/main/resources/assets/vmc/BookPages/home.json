@@ -12,24 +12,20 @@
             "g": 1,
             "b": 0.5
         },
-
         "returnColor": {
             "r": 0,
             "g": 1,
             "b": 0.5
         },
-
         "selectorColor": {
             "r": 1,
             "g": 0.3,
             "b": 1
         },
-
         "text": {
             "line0": "Getting Started With Magic"
         }
     },
-
     "item1": {
         "x": 20,
         "y": 20,
@@ -42,25 +38,20 @@
             "g": 1,
             "b": 0.5
         },
-
         "returnColor": {
             "r": 0,
             "g": 1,
             "b": 0.5
         },
-
         "selectorColor": {
             "r": 1,
             "g": 0.3,
             "b": 1
         },
-
         "text": {
             "line0": "Essence's References"
         }
     },
-    
-    
     "item2": {
         "x": 0,
         "y": 40,
@@ -73,19 +64,16 @@
             "g": 1,
             "b": 0.5
         },
-
         "returnColor": {
             "r": 0,
             "g": 1,
             "b": 0.5
         },
-
         "selectorColor": {
             "r": 1,
             "g": 0.3,
             "b": 1
         },
-
         "text": {
             "line0": "Essence's References",
             "line1": "Actually just a test"
