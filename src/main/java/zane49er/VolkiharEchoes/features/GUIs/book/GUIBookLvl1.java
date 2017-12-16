@@ -1,26 +1,33 @@
 package zane49er.VolkiharEchoes.features.GUIs.book;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 
-import zane49er.VolkiharEchoes.init.ModItems;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.sun.deploy.uitoolkit.impl.fx.ui.resources.ResourceManager;
+
 import zane49er.VolkiharEchoes.main.References;
 
 public class GUIBookLvl1 extends GuiScreen {
@@ -59,9 +66,9 @@ public class GUIBookLvl1 extends GuiScreen {
 
 		// scrolling
 		if (Mouse.isButtonDown(0)) {
-			if (scrolling != 1){
+			if (scrolling != 1) {
 				for (int i = 0; i < bItems.size(); i++) {
-					if(bItems.get(i).hovering){
+					if (bItems.get(i).hovering) {
 						pageID = bItems.get(i).link;
 						try {
 							refresh();
@@ -72,7 +79,7 @@ public class GUIBookLvl1 extends GuiScreen {
 					}
 				}
 			}
-			
+
 			if ((this.scrolling == 0 || this.scrolling == 1) && mouseX >= left && mouseX < left + GUIWidth && mouseY >= top && mouseY < top + GUIHeight) {
 				if (this.scrolling == 0) {
 					this.scrolling = 1;
@@ -293,31 +300,65 @@ public class GUIBookLvl1 extends GuiScreen {
 		bItems.clear();
 
 		// load new one
-		pageData = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("assets/vmc/BookPages/" + pageID + ".txt"), "UTF-8"));
+		//InputStreamReader ex = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("/assets/vmc/BookPages/" + pageID + ".json"));
+		//String pageString = new String(Files.readAllBytes(Paths.get()));
+		//String pageString = ex.read();
+		/*InputStream ex = VolkiharEchoes.class.getClassLoader().getResourceAsStream(resourceName);
+		BufferedOutputStream streamOut = new BufferedOutputStream(new FileOutputStream(destination));
+		byte[] buffer = new byte[1024];
+		boolean len = false;
+		int len1;
 
-		pageName = pageData.readLine();
-
-		while (pageData.ready()) {
-			// pageData.readLine();//skip one
-			BookItem b = new BookItem();
-			b.x = Integer.parseInt(pageData.readLine());
-			b.y = Integer.parseInt(pageData.readLine());
-			b.item = Item.getByNameOrId(pageData.readLine());
-			b.scale = Float.parseFloat(pageData.readLine());
-			b.link = pageData.readLine();
-			b.bgType = Integer.parseInt(pageData.readLine());
-			b.r = Float.parseFloat(pageData.readLine());
-			b.g = Float.parseFloat(pageData.readLine());
-			b.b = Float.parseFloat(pageData.readLine());
-			b.rn = Float.parseFloat(pageData.readLine());
-			b.gn = Float.parseFloat(pageData.readLine());
-			b.bn = Float.parseFloat(pageData.readLine());
-			b.rSel = Float.parseFloat(pageData.readLine());
-			b.gSel = Float.parseFloat(pageData.readLine());
-			b.bSel = Float.parseFloat(pageData.readLine());
-			b.name = pageData.readLine();
-			bItems.add(b);
+		while ((len1 = ex.read(buffer)) >= 0)
+		{
+			streamOut.write(buffer, 0, len1);
 		}
+
+		ex.close();
+		streamOut.close();
+		
+		String pageString = buffer.toString();*/
+		//
+		//BufferedReader pageScan = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("assets/vmc/BookPages/" + pageID + ".txt"), "UTF-8"));
+		//String pageString = "";
+		//while(pageScan.ready()){
+		//	pageString += pageScan.readLine();
+		//}
+		//JsonObject pageData = new Gson().fromJson(ResourceManager.getString(pageString), JsonObject.class);
+		String resourceName = "assets/vmc/BookPages/" + pageID + ".json";
+		BufferedReader pageScan = new BufferedReader(new InputStreamReader(getClass().getClassLoader ().getResourceAsStream(resourceName), "UTF-8"));
+		JsonObject pageData = new Gson().fromJson(pageScan, JsonObject.class);
+		pageName = pageData.get("name").getAsString();
+
+		/*
+		 * pageData = new BufferedReader(new
+		 * InputStreamReader(getClass().getClassLoader
+		 * ().getResourceAsStream("assets/vmc/BookPages/" + pageID + ".txt"),
+		 * "JSON"));
+		 * 
+		 * String a = pageData.readLine();//skip one for openbracket pageName =
+		 * pageData.readLine();
+		 * 
+		 * while (pageData.ready()) { a = pageData.readLine();//read type to
+		 * fill
+		 * 
+		 * BookItem b = new BookItem(); b.x =
+		 * Integer.parseInt(pageData.readLine()); b.y =
+		 * Integer.parseInt(pageData.readLine()); b.item =
+		 * Item.getByNameOrId(pageData.readLine()); b.scale =
+		 * Float.parseFloat(pageData.readLine()); b.link = pageData.readLine();
+		 * b.bgType = Integer.parseInt(pageData.readLine()); b.r =
+		 * Float.parseFloat(pageData.readLine()); b.g =
+		 * Float.parseFloat(pageData.readLine()); b.b =
+		 * Float.parseFloat(pageData.readLine()); b.rn =
+		 * Float.parseFloat(pageData.readLine()); b.gn =
+		 * Float.parseFloat(pageData.readLine()); b.bn =
+		 * Float.parseFloat(pageData.readLine()); b.rSel =
+		 * Float.parseFloat(pageData.readLine()); b.gSel =
+		 * Float.parseFloat(pageData.readLine()); b.bSel =
+		 * Float.parseFloat(pageData.readLine()); b.name = pageData.readLine();
+		 * bItems.add(b); }
+		 */
 
 		// reset cam
 		xScroll = width / 2;
