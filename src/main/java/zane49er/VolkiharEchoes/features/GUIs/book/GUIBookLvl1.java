@@ -59,7 +59,20 @@ public class GUIBookLvl1 extends GuiScreen {
 
 		// scrolling
 		if (Mouse.isButtonDown(0)) {
-
+			if (scrolling != 1){
+				for (int i = 0; i < bItems.size(); i++) {
+					if(bItems.get(i).hovering){
+						pageID = bItems.get(i).link;
+						try {
+							refresh();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+			
 			if ((this.scrolling == 0 || this.scrolling == 1) && mouseX >= left && mouseX < left + GUIWidth && mouseY >= top && mouseY < top + GUIHeight) {
 				if (this.scrolling == 0) {
 					this.scrolling = 1;
@@ -183,21 +196,20 @@ public class GUIBookLvl1 extends GuiScreen {
 				GlStateManager.scale(b.scale, b.scale, b.scale);
 				this.drawTexturedModalRect(0, 0, 36 * b.bgType, GUIHeight, 36, 36);
 
-
 				GlStateManager.translate(36 / 2, 36 / 2, 0);
 				GlStateManager.scale(borderSize, borderSize, borderSize);
 				GlStateManager.translate(-16 / 2, -16 / 2, 0);
 
 				this.itemRender.renderItemAndEffectIntoGUI(new ItemStack(b.item), 0, 0);
 
-
 			} else {
 				b.hovering = false;
-				// explode		
+				// explode
 				int Px = (int) (b.x) + pxScroll;
 				int Py = (int) (b.y) + pyScroll;
 
 				if (Px >= left && Py >= top && Px <= left + GUIWidth - 36 * b.scale && (float) Py <= top + GUIHeight - 36 * b.scale) {
+					System.out.println("BOOM!");
 					for (int j = 0; j < (random.nextInt(100) + 15) * b.scale; j++) {
 						BookSymbol s = new BookSymbol();
 						s.u = (random.nextInt(5) * 16) + 170;
@@ -238,7 +250,8 @@ public class GUIBookLvl1 extends GuiScreen {
 	public void initGui() {
 		// this.buttonList.add(this.home = new GuiButton(0, this.width / 2 -
 		// 100, this.height / 2 - 24, "home"));
-		this.buttonList.add(this.home = new GuiButton(0, 0, 0, 40, 20, "home"));
+		// this.buttonList.add(this.home = new GuiButton(0, 0, 0, 40, 20,
+		// "home"));
 		// this.buttonList.add(this.b = new GuiButton(1, this.width / 2 - 100,
 		// this.height / 2 + 4, "This is button b"));
 		left = (width / 2) - (GUIWidth / 2);
@@ -280,12 +293,12 @@ public class GUIBookLvl1 extends GuiScreen {
 		bItems.clear();
 
 		// load new one
-		pageData = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("assets/vmc/BookPages/"+pageID+".txt"), "UTF-8"));
+		pageData = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("assets/vmc/BookPages/" + pageID + ".txt"), "UTF-8"));
 
 		pageName = pageData.readLine();
 
 		while (pageData.ready()) {
-			//pageData.readLine();//skip one
+			// pageData.readLine();//skip one
 			BookItem b = new BookItem();
 			b.x = Integer.parseInt(pageData.readLine());
 			b.y = Integer.parseInt(pageData.readLine());
@@ -305,8 +318,8 @@ public class GUIBookLvl1 extends GuiScreen {
 			b.name = pageData.readLine();
 			bItems.add(b);
 		}
-		
-		//reset cam
+
+		// reset cam
 		xScroll = width / 2;
 		yScroll = height / 2;
 

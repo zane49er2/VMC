@@ -1,0 +1,30 @@
+{
+    "Name": "Essences",
+    "Item": {
+        "x": 0,
+        "y": 0,
+        "Image": "vmc:rift_reader",
+        "scale": 0.5,
+        "link": "home",
+        "bgType": 1,
+        "color": {
+            "r": 0,
+            "g": 1,
+            "b": 0.5
+        },
+
+        "returnColor": {
+            "r": 0,
+            "g": 1,
+            "b": 0.5
+        },
+
+        "selectorColor": {
+            "r": 1,
+            "g": 0.3,
+            "b": 1
+        },
+
+        "description": "Go Back"
+    }
+}

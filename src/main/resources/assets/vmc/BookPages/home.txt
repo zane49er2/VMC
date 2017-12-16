@@ -1,9 +1,9 @@
 Home
 0
 0
-vmc:essence
+minecraft:dirt
 0.5
-Getting_started
+getting_started
 1
 0
 1
@@ -14,12 +14,12 @@ Getting_started
 1
 0.3
 1
-Getting Started
+Getting Started With Magic
 50
 50
 vmc:essence
 1
-Essence
+essence
 2
 0
 1
@@ -30,4 +30,4 @@ Essence
 1
 0.3
 1
-Essences
+Essence's References
