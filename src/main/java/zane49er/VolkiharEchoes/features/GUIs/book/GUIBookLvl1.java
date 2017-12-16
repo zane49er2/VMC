@@ -1,34 +1,26 @@
 package zane49er.VolkiharEchoes.features.GUIs.book;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import jdk.nashorn.internal.parser.JSONParser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 
+import zane49er.VolkiharEchoes.main.References;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.sun.deploy.uitoolkit.impl.fx.ui.resources.ResourceManager;
-
-import zane49er.VolkiharEchoes.main.References;
 
 public class GUIBookLvl1 extends GuiScreen {
 
@@ -166,21 +158,21 @@ public class GUIBookLvl1 extends GuiScreen {
 				// selection detection
 				if (mouseX > Tx && mouseY > Ty && mouseX < Tx + 36 * b.scale && mouseY < Ty + 36 * b.scale) {
 					b.hovering = true;
-					b.r += selSpeed * (b.rSel - b.r);
-					b.g += selSpeed * (b.gSel - b.g);
-					b.b += selSpeed * (b.bSel - b.b);
+					b.rc += selSpeed * (b.rs - b.rc);
+					b.gc += selSpeed * (b.gs - b.gc);
+					b.bc += selSpeed * (b.bs - b.bc);
 				} else {
 					b.hovering = false;
-					b.r += selSpeed * (b.rn - b.r);
-					b.g += selSpeed * (b.gn - b.g);
-					b.b += selSpeed * (b.bn - b.b);
+					b.rc += selSpeed * (b.rn - b.rc);
+					b.gc += selSpeed * (b.gn - b.gc);
+					b.bc += selSpeed * (b.bn - b.bc);
 				}
 
 				this.mc.getTextureManager().bindTexture(texture);
 
 				GlStateManager.enableBlend();
 				GlStateManager.translate(Tx, Ty, 0);
-				GlStateManager.color(b.r, b.g, b.b, 1.0F);
+				GlStateManager.color(b.rc, b.gc, b.bc, 1.0F);
 				float borderSize = 1f;
 				switch (b.bgType) {
 				case 0:
@@ -227,9 +219,9 @@ public class GUIBookLvl1 extends GuiScreen {
 						s.x = Px + random.nextInt((int) (36 * b.scale));
 						s.y = Py + random.nextInt((int) (36 * b.scale));
 
-						s.r = b.r;
-						s.g = b.g;
-						s.b = b.b;
+						s.r = b.rc;
+						s.g = b.gc;
+						s.b = b.bc;
 						s.age = 1;
 						s.noFadeIn = true;
 						particles.add(s);
@@ -239,10 +231,10 @@ public class GUIBookLvl1 extends GuiScreen {
 			GlStateManager.popMatrix();
 			// tooltip
 			if (b.hovering) {
-				List<String> j = new ArrayList<String>();
-				j.add(b.name);
+				// List<String> j = new ArrayList<String>();
+				// j.add(b.name);
 				GlStateManager.pushMatrix();
-				drawHoveringText(j, mouseX, mouseY, fontRendererObj);
+				drawHoveringText(b.text, mouseX, mouseY, fontRendererObj);
 				GlStateManager.popMatrix();
 			}
 
@@ -272,7 +264,7 @@ public class GUIBookLvl1 extends GuiScreen {
 	}
 
 	void refresh() throws IOException {
-		// delete old page
+		// explode old page
 		for (int i = 0; i < bItems.size(); i++) {
 			BookItem b = bItems.get(i);
 			int Px = (int) (b.x) + pxScroll;
@@ -288,9 +280,9 @@ public class GUIBookLvl1 extends GuiScreen {
 					s.x = Px + random.nextInt((int) (36 * b.scale));
 					s.y = Py + random.nextInt((int) (36 * b.scale));
 
-					s.r = b.r;
-					s.g = b.g;
-					s.b = b.b;
+					s.r = b.rn;
+					s.g = b.gn;
+					s.b = b.bn;
 					s.disappearing = true;
 					particles.add(s);
 					s.age = 50;
@@ -300,52 +292,86 @@ public class GUIBookLvl1 extends GuiScreen {
 		bItems.clear();
 
 		// load new one
-		//InputStreamReader ex = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("/assets/vmc/BookPages/" + pageID + ".json"));
-		//String pageString = new String(Files.readAllBytes(Paths.get()));
-		//String pageString = ex.read();
-		/*InputStream ex = VolkiharEchoes.class.getClassLoader().getResourceAsStream(resourceName);
-		BufferedOutputStream streamOut = new BufferedOutputStream(new FileOutputStream(destination));
-		byte[] buffer = new byte[1024];
-		boolean len = false;
-		int len1;
-
-		while ((len1 = ex.read(buffer)) >= 0)
-		{
-			streamOut.write(buffer, 0, len1);
-		}
-
-		ex.close();
-		streamOut.close();
-		
-		String pageString = buffer.toString();*/
-		//
-		//BufferedReader pageScan = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream("assets/vmc/BookPages/" + pageID + ".txt"), "UTF-8"));
-		//String pageString = "";
-		//while(pageScan.ready()){
-		//	pageString += pageScan.readLine();
-		//}
-		//JsonObject pageData = new Gson().fromJson(ResourceManager.getString(pageString), JsonObject.class);
 		String resourceName = "assets/vmc/BookPages/" + pageID + ".json";
-		BufferedReader pageScan = new BufferedReader(new InputStreamReader(getClass().getClassLoader ().getResourceAsStream(resourceName), "UTF-8"));
+		BufferedReader pageScan = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(resourceName), "UTF-8"));
 		JsonObject pageData = new Gson().fromJson(pageScan, JsonObject.class);
+
+		// name
 		pageName = pageData.get("name").getAsString();
 
+		// items
+		int i = 0;
+		while (pageData.has("item" + i)) {
+			JsonObject c = pageData.get("item" + i).getAsJsonObject();
+			JsonObject col;
+			BookItem b = new BookItem();
+			b.x = c.get("x").getAsInt();
+			b.y = c.get("y").getAsInt();
+			b.item = Item.getByNameOrId(c.get("Image").getAsString());
+			b.scale = c.get("scale").getAsFloat();
+			b.link = c.get("link").getAsString();
+			b.bgType = c.get("bgType").getAsInt();
+			// colors
+			col = c.get("color").getAsJsonObject();
+			b.rc = col.get("r").getAsInt();
+			b.gc = col.get("g").getAsInt();
+			b.bc = col.get("b").getAsInt();
+			col = c.get("returnColor").getAsJsonObject();
+			b.rn = col.get("r").getAsInt();
+			b.gn = col.get("g").getAsInt();
+			b.bn = col.get("b").getAsInt();
+			col = c.get("selectorColor").getAsJsonObject();
+			b.rs = col.get("r").getAsInt();
+			b.gs = col.get("g").getAsInt();
+			b.bs = col.get("b").getAsInt();
+			// text
+			JsonObject t = c.get("text").getAsJsonObject();
+			int j = 0;
+			while (t.has("line" + j)) {
+				b.text.add(t.get("line" + j).getAsString());
+				j++;
+			}
+			bItems.add(b);
+			i++;
+		}
+		while (pageData.has("text" + i)) {
+			JsonObject c = pageData.get("item" + i).getAsJsonObject();
+			JsonObject col;
+			BookItem b = new BookItem();
+			b.x = c.get("x").getAsInt();
+			b.y = c.get("y").getAsInt();
+			b.item = Item.getByNameOrId(c.get("Image").getAsString());
+			b.scale = c.get("scale").getAsFloat();
+			b.link = c.get("link").getAsString();
+			b.bgType = c.get("bgType").getAsInt();
+			// colors
+			col = c.get("color").getAsJsonObject();
+			b.rc = col.get("r").getAsInt();
+			b.gc = col.get("g").getAsInt();
+			b.bc = col.get("b").getAsInt();
+			col = c.get("returnColor").getAsJsonObject();
+			b.rn = col.get("r").getAsInt();
+			b.gn = col.get("g").getAsInt();
+			b.bn = col.get("b").getAsInt();
+			col = c.get("selectorColor").getAsJsonObject();
+			b.rs = col.get("r").getAsInt();
+			b.gs = col.get("g").getAsInt();
+			b.bs = col.get("b").getAsInt();
+			// text
+			JsonObject t = c.get("text").getAsJsonObject();
+			int j = 0;
+			while (t.has("line" + j)) {
+				b.text.add(t.get("line" + j).getAsString());
+				j++;
+			}
+			bItems.add(b);
+			i++;
+		}
+		// text
+		// detail
+
 		/*
-		 * pageData = new BufferedReader(new
-		 * InputStreamReader(getClass().getClassLoader
-		 * ().getResourceAsStream("assets/vmc/BookPages/" + pageID + ".txt"),
-		 * "JSON"));
-		 * 
-		 * String a = pageData.readLine();//skip one for openbracket pageName =
-		 * pageData.readLine();
-		 * 
-		 * while (pageData.ready()) { a = pageData.readLine();//read type to
-		 * fill
-		 * 
-		 * BookItem b = new BookItem(); b.x =
-		 * Integer.parseInt(pageData.readLine()); b.y =
-		 * Integer.parseInt(pageData.readLine()); b.item =
-		 * Item.getByNameOrId(pageData.readLine()); b.scale =
+		 * b.item = Item.getByNameOrId(pageData.readLine()); b.scale =
 		 * Float.parseFloat(pageData.readLine()); b.link = pageData.readLine();
 		 * b.bgType = Integer.parseInt(pageData.readLine()); b.r =
 		 * Float.parseFloat(pageData.readLine()); b.g =

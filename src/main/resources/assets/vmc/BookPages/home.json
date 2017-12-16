@@ -1,12 +1,12 @@
 {
     "name": "Home",
-    "item": {
+    "item0": {
         "x": 0,
         "y": 0,
         "Image": "minecraft:dirt",
         "scale": 0.5,
         "link": "getting_started",
-        "bgType": 1,
+        "bgType": 0,
         "color": {
             "r": 0,
             "g": 1,
@@ -25,14 +25,17 @@
             "b": 1
         },
 
-        "description": "Getting Started With Magic"
+        "text": {
+            "line0": "Getting Started With Magic"
+        }
     },
-    "item": {
-        "x": 0,
-        "y": 0,
+
+    "item1": {
+        "x": 20,
+        "y": 20,
         "Image": "vmc:essence",
         "scale": 1,
-        "link": "essence",
+        "link": "essences",
         "bgType": 1,
         "color": {
             "r": 0,
@@ -52,6 +55,40 @@
             "b": 1
         },
 
-        "description": "Essence's References"
+        "text": {
+            "line0": "Essence's References"
+        }
+    },
+    
+    
+    "item2": {
+        "x": 0,
+        "y": 40,
+        "Image": "vmc:essence",
+        "scale": 1,
+        "link": "essences",
+        "bgType": 1,
+        "color": {
+            "r": 0,
+            "g": 1,
+            "b": 0.5
+        },
+
+        "returnColor": {
+            "r": 0,
+            "g": 1,
+            "b": 0.5
+        },
+
+        "selectorColor": {
+            "r": 1,
+            "g": 0.3,
+            "b": 1
+        },
+
+        "text": {
+            "line0": "Essence's References",
+            "line1": "Actually just a test"
+        }
     }
 }

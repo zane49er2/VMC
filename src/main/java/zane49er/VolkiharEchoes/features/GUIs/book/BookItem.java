@@ -1,6 +1,7 @@
 package zane49er.VolkiharEchoes.features.GUIs.book;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.item.Item;
@@ -13,16 +14,16 @@ public class BookItem {
 	float scale;
 	String link;
 	int bgType;
-	float r;
-	float g;
-	float b;
+	float rc;
+	float gc;
+	float bc;
 	float rn;
 	float gn;
 	float bn;
-	float rSel;
-	float gSel;
-	float bSel;
-	String name;
+	float rs;
+	float gs;
+	float bs;
+	List<String> text = new ArrayList<String>();
 	
 	boolean hovering;
 	boolean enabled;
