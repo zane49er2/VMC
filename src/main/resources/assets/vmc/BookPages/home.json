@@ -54,7 +54,7 @@
     },
     "item2": {
         "x": 0,
-        "y": 40,
+        "y": 60,
         "Image": "vmc:essence",
         "scale": 1,
         "link": "essences",
@@ -77,6 +77,31 @@
         "text": {
             "line0": "Essence's References",
             "line1": "Actually just a test"
+        }
+    },
+    "line0": {
+        "scale": 1,
+        "parent": "",
+        "child": "",
+        "x": 0,
+        "y": 0,
+        "colorf": {
+            "_comment": "for when something is complete",
+            "r": 0,
+            "g": 1,
+            "b": 0.5
+        },
+        "colorb": {
+            "_comment": "for when something is greyed out",
+            "r": 0,
+            "g": 1,
+            "b": 0.5
+        },
+        "segments": {
+            "s0": {
+                "rot": 1,
+                "len": 10
+            }
         }
     }
 }

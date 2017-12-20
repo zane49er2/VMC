@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
@@ -51,6 +50,7 @@ public class GUIBookLvl1 extends GuiScreen {
 	// page info
 	private ArrayList<BookItem> bItems = new ArrayList<BookItem>();
 	private ArrayList<BookText> bText = new ArrayList<BookText>();
+	private ArrayList<BookDetail> bLines = new ArrayList<BookDetail>();
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -208,7 +208,7 @@ public class GUIBookLvl1 extends GuiScreen {
 				int Py = (int) (b.y) + pyScroll;
 
 				if (Px >= left && Py >= top && Px <= left + GUIWidth - 36 * b.scale && (float) Py <= top + GUIHeight - 36 * b.scale) {
-					System.out.println("BOOM!");
+					//System.out.println("BOOM!");
 					for (int j = 0; j < (random.nextInt(100) + 15) * b.scale; j++) {
 						BookSymbol s = new BookSymbol();
 						s.u = (random.nextInt(5) * 16) + 170;
@@ -249,20 +249,38 @@ public class GUIBookLvl1 extends GuiScreen {
 			int Tx = (int) (b.x) + xScroll;
 			int Ty = (int) (b.y) + yScroll;
 			{
-				
 				for (int j = 0; j < b.text.size(); j++) {
-					for (int k = 0; k<b.text.get(j).length();k++){
-						int cx=(int) (Tx+(10*k*b.scale));
-						int cy=(int) (Ty+(15*j*b.scale));
+					for (int k = 0; k < b.text.get(j).length(); k++) {
+						int cx = (int) (Tx + (10 * k * b.scale));
+						int cy = (int) (Ty + (15 * j * b.scale));
 						GlStateManager.pushMatrix();
 						GlStateManager.translate(cx, cy, 0);
 						GlStateManager.scale(b.scale, b.scale, b.scale);
-						if(cx>left&&cy>top&&cx<left+GUIWidth&&cy<top+GUIHeight) drawString(fontRendererObj, String.valueOf(b.text.get(j).charAt(k)), 0, 0, 0xFFFFFF);
+						if (cx > left && cy > top && cx < left + GUIWidth && cy < top + GUIHeight) drawString(fontRendererObj, String.valueOf(b.text.get(j).charAt(k)), 0, 0, 0xFFFFFF);
 						GlStateManager.popMatrix();
 					}
 				}
 			}
 		}
+		// lines
+		for (int i = 0; i < bLines.size(); i++) {
+			BookDetail b = bLines.get(i);
+			int cx = (int) ((b.x + xScroll) * b.scale);
+			int cy = (int) ((b.y + yScroll) * b.scale);
+			if (cx > left && cy > top && cx < left + GUIWidth && cy < top + GUIHeight) {
+				GlStateManager.pushMatrix();
+				{
+					GlStateManager.translate((b.x + xScroll), (b.y + yScroll), 0);
+					GlStateManager.rotate(b.rot, 1, 0, 0);
+					GlStateManager.scale(b.scale, b.scale, b.scale);
+
+					this.mc.getTextureManager().bindTexture(b.texture);
+					drawTexturedModalRect(0, 0, b.u, b.v, b.w, b.h);
+				}
+				GlStateManager.popMatrix();
+			}
+		}
+
 	}
 
 	public void initGui() {
@@ -309,6 +327,8 @@ public class GUIBookLvl1 extends GuiScreen {
 			}
 		}
 		bItems.clear();
+		bText.clear();
+		bLines.clear();
 
 		// load new one
 		String resourceName = "assets/vmc/BookPages/" + pageID + ".json";
@@ -354,7 +374,7 @@ public class GUIBookLvl1 extends GuiScreen {
 			i++;
 		}
 		// text
-		i=0;
+		i = 0;
 		while (pageData.has("text" + i)) {
 			JsonObject c = pageData.get("text" + i).getAsJsonObject();
 			JsonObject col = c.get("color").getAsJsonObject();
@@ -369,16 +389,145 @@ public class GUIBookLvl1 extends GuiScreen {
 			// contents
 			JsonObject t = c.get("text").getAsJsonObject();
 			int j = 0;
-			//System.out.println(t.has("line1"));
+			// System.out.println(t.has("line1"));
 			while (t.has("line" + j)) {
 				b.text.add(t.get("line" + j).getAsString());
 				j++;
 			}
-			//System.out.println(b.text);
+			// System.out.println(b.text);
 			bText.add(b);
 			i++;
 		}
-		// details
+		// lines
+		i = 0;
+		while (pageData.has("line" + i)) {
+			JsonObject c = pageData.get("line" + i).getAsJsonObject();
+			JsonObject segs = c.get("segments").getAsJsonObject();
+			float scale = c.get("scale").getAsFloat();
+			int j = 0;
+			boolean first = true;
+			int cx = 0;
+			int cy = 0;
+			while (segs.has("s" + j)) {
+				JsonObject dat = segs.get("s" + j).getAsJsonObject();
+				for (int k = 0; k < dat.get("len").getAsInt(); k++) {
+					BookDetail b = new BookDetail();
+					b.scale = scale;
+					b.texture = new ResourceLocation(References.MODID, "textures/gui/RiftTomeGui.png");
+					b.u = 170;
+					switch (dat.get("rot").getAsInt()) {
+					case 0:
+						// up
+						if (!first) {
+							cx += 0;
+							cy += 12;
+						} else first = false;
+						b.x = cx;
+						b.y = cy;
+						b.v = 64;
+						b.w = 8;
+						b.h = 12;
+						b.rot = 0;
+						break;
+					case 1:
+						// up right
+						if (!first) {
+							cx += 8;
+							cy += 8;
+						} else first = false;
+						b.x = cx;
+						b.y = cy;
+						b.v = 76;
+						b.w = 11;
+						b.h = 11;
+						b.rot = 0;
+						break;
+					case 2:
+						// right
+						if (!first) {
+							cx += 12;
+							cy += 0;
+						} else first = false;
+						b.x = cx;
+						b.y = cy;
+						b.v = 64;
+						b.w = 8;
+						b.h = 12;
+						b.rot = 90;
+						break;
+					case 3:
+						// down right
+						if (!first) {
+							cx += 8;
+							cy -= 8;
+						} else first = false;
+						b.x = cx;
+						b.y = cy;
+						b.v = 76;
+						b.w = 11;
+						b.h = 11;
+						b.rot = 90;
+						break;
+					case 4:
+						// down
+						if (!first) {
+							cx += 0;
+							cy -= 12;
+						} else first = false;
+						b.x = cx;
+						b.y = cy;
+						b.v = 64;
+						b.w = 8;
+						b.h = 12;
+						b.rot = 180;
+						break;
+					case 5:
+						// down left
+						if (!first) {
+							cx -= 8;
+							cy -= 8;
+						} else first = false;
+						b.x = cx;
+						b.y = cy;
+						b.v = 76;
+						b.w = 11;
+						b.h = 11;
+						b.rot = 180;
+						break;
+					case 6:
+						// left
+						if (!first) {
+							cx -= 12;
+							cy += 0;
+						} else first = false;
+						b.x = cx;
+						b.y = cy;
+						b.v = 64;
+						b.w = 8;
+						b.h = 12;
+						b.rot = 270;
+						break;
+					case 7:
+						// up left
+						if (!first) {
+							cx -= 8;
+							cy += 8;
+						} else first = false;
+						b.x = cx;
+						b.y = cy;
+						b.v = 76;
+						b.w = 11;
+						b.h = 11;
+						b.rot = 270;
+						break;
+					}
+
+					bLines.add(b);
+				}
+				j++;
+			}
+			i++;
+		}
 
 		// reset cam
 		xScroll = width / 2;

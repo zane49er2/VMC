@@ -38,10 +38,11 @@
         "text": {
             "line0": "Essence's References",
             "line1": "Actually just a test",
-            "line2": "I wonder if this is ",
-            "line3": "actually Monospaced ",
+            "line2": "I wonder if this is-",
+            "line3": "actually Monospaced-",
             "line4": "a                   ",
-            "line5": "                   a"
+            "line5": "                   a",
+            "line6": "It               is."
         }
     }
 }
